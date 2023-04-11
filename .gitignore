@@ -20,5 +20,9 @@
 # Go workspace file
 go.work
 
+# database
+*.db
+
+# compiled output
 zeitungsfritze
 zeitungsfritze.exe
