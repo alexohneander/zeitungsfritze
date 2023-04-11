@@ -14,6 +14,7 @@ func Run(version, commitHash string) {
 		Version: fmt.Sprintf("%s; zeitungsfritze/server@%s", version, commitHash),
 		Commands: []cli.Command{
 			serveCmd(version),
+			migrateCmd(),
 		},
 	}
 	err := app.Run(os.Args)
