@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Forward struct {
 	gorm.Model
-	Domain string
+	Domain string `gorm:"unique"`
 	Target string
 	Port   string
 }
