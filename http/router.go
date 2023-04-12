@@ -9,7 +9,8 @@ func ConfigureRoutes(app *fiber.App) *fiber.App {
 	apiGroup := app.Group("/api")
 	v1Group := apiGroup.Group("/v1")
 
-	v1Group.Get("/domains/create", api.CreateDomain) // /api/v1/domains/create
+	v1Group.Get("/domains/create", api.CreateDomain)         // /api/v1/domains/create
+	v1Group.Get("/domains/delete/:domain", api.DeleteDomain) // /api/v1/domains/delete/:domain
 
 	return app
 }
