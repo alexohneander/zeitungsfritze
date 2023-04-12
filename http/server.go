@@ -17,6 +17,6 @@ func StartServer(version string, ctx *cli.Context) {
 	app = ConfigureRoutes(app)
 	database.Connect()
 
-	log.Info().Msg("Starting http server on :" + ctx.String("port"))
+	log.Info().Msg("Started http server on :" + ctx.String("port"))
 	app.Listen(":" + ctx.String("port"))
 }
