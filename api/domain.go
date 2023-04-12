@@ -10,7 +10,7 @@ import (
 
 var db, dbErr = database.Connect()
 
-func CreateDomain(c *fiber.Ctx) error {
+func CreateDomain(ctx *fiber.Ctx) error {
 	domain := helper.CreateDomain()
 	forward := model.Forward{Domain: domain, Target: "127.0.0.1", Port: "8080"}
 
@@ -18,13 +18,25 @@ func CreateDomain(c *fiber.Ctx) error {
 
 	if result.Error != nil || dbErr != nil {
 		log.Error().Msg("Error creating domain: " + result.Error.Error())
+
+		ctx.Status(500)
+		return ctx.JSON(fiber.Map{"status": "error"})
 	}
 
-	return c.JSON(fiber.Map{"domain": domain})
+	return ctx.JSON(fiber.Map{"status": "success", "domain": domain})
 }
 
-func DeleteDomain() {
+func DeleteDomain(ctx *fiber.Ctx) error {
+	result := db.Where("domain = ?", ctx.Params("domain")).Delete(&model.Forward{})
 
+	if result.Error != nil || dbErr != nil {
+		log.Error().Msg("Error deleting domain: " + result.Error.Error())
+
+		ctx.Status(500)
+		return ctx.JSON(fiber.Map{"status": "error"})
+	}
+
+	return ctx.JSON(fiber.Map{"status": "success"})
 }
 
 func GetDomain() {
