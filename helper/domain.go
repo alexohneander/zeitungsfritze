@@ -1,10 +1,7 @@
 package helper
 
 import (
-	"fmt"
 	"math/rand"
-
-	"github.com/rs/zerolog/log"
 )
 
 var pizzaIngredients = []string{
@@ -34,6 +31,5 @@ func CreateDomain() (domain string) {
 			domain += "-"
 		}
 	}
-	log.Info().Msg(fmt.Sprintf("Generated domain: %s", domain))
 	return domain
 }
