@@ -20,6 +20,10 @@
 # Environment variables
 .env
 
+# Scannerwork
+.scannerwork
+scan-src.sh
+
 # Go workspace file
 go.work
 
