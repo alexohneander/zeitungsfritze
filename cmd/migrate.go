@@ -11,11 +11,11 @@ func migrateCmd() cli.Command {
 	return cli.Command{
 		Name: "migrate",
 		Action: func(ctx *cli.Context) {
-			db, connectErr := database.Connect()
-			migrateErr := database.Migrate(db)
+			database.Connect()
+			migrateErr := database.Migrate(database.DB)
 
-			if connectErr != nil || migrateErr != nil {
-				log.Error().Msg("Error migrating database: " + connectErr.Error() + migrateErr.Error())
+			if migrateErr != nil {
+				log.Panic().Msg("Error migrating database: " + migrateErr.Error())
 			}
 		},
 	}
